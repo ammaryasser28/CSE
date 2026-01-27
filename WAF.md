@@ -30,6 +30,9 @@
 - GET /login.php?user=admin' OR '1'='1 → BLOCK
 > WAF detects an **SQL Injection attempt** and blocks it before it reaches the web application.
 
+
+<img width="729" height="289" alt="image" src="https://github.com/user-attachments/assets/0f3e9e31-2d25-45a9-8180-e486ac85a659" />
+
 ---
 
 ## 🚨 Why WAF is Important
