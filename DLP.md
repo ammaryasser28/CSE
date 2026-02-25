@@ -1,222 +1,183 @@
-🔐 Data Loss Prevention (DLP)
-Overview
+# 🔐 Data Loss Prevention (DLP)
 
-Data Loss Prevention (DLP) is a set of tools and policies designed to protect sensitive data from:
+## Overview
+**Data Loss Prevention (DLP)** is a set of tools and policies designed to protect sensitive data from:
 
-Unauthorized access
+- Unauthorized access  
+- Accidental exposure  
+- Intentional or unintentional data leakage  
 
-Accidental exposure
+**Primary Goal:** Protect data confidentiality and prevent sensitive information from leaving the organization.
 
-Intentional or unintentional data leakage
+---
 
-The primary goal of DLP is to protect data confidentiality and prevent sensitive information from leaving the organization.
+## 1. Attacker Objectives
+When an attacker gains access to a network, objectives may include:
 
-1. Attacker Objectives
+### Service Disruption
+Disabling systems or services.  
+**Examples:**
+- DDoS attacks  
+- System shutdowns  
 
-When an attacker gains access to a network, their objectives may vary:
-
-Service Disruption
-
-Disabling systems or services.
-Examples:
-
-DDoS attacks
-
-System shutdowns
-
-Data Corruption
-
+### Data Corruption
 Modifying, deleting, or encrypting data to make it unusable.
 
-Data Leakage
+### Data Leakage
+Stealing sensitive information and transferring it outside the organization.  
 
-Stealing sensitive information and transferring it outside the organization.
+**Modern ransomware often uses Double Extortion:**
+1. Data exfiltration  
+2. Data encryption  
+3. Threaten to publish the data if ransom is not paid  
 
-Modern ransomware often uses Double Extortion:
+---
 
-Data exfiltration
+## 2. Data Corruption vs Data Leakage
 
-Data encryption
+| Type | Description | Security Impact |
+|------|------------|----------------|
+| Data Corruption | Data is altered, damaged, or encrypted | Integrity |
+| Data Leakage | Data is exposed to unauthorized parties | Confidentiality |
 
-Threatening to publish the data if payment is not made
+**Examples**
 
-2. Data Corruption vs Data Leakage
-Type	Description	Security Impact
-Data Corruption	Data is altered, damaged, or encrypted	Integrity
-Data Leakage	Data is exposed to unauthorized parties	Confidentiality
-Examples
+**Data Corruption**
+- Database encrypted by ransomware  
+- Files modified or damaged  
 
-Data Corruption
+**Data Leakage**
+- Employee sends customer data to personal email  
+- Sensitive files uploaded to external cloud storage  
 
-Database encrypted by ransomware
+---
 
-Files modified or damaged
-
-Data Leakage
-
-Employee sends customer data to a personal email
-
-Sensitive files uploaded to external cloud storage
-
-3. Sources of Data Loss
-
+## 3. Sources of Data Loss
 Data loss is not always caused by attackers.
 
-External Attackers
+### External Attackers
+- Network compromise  
+- Data exfiltration  
 
-Network compromise
+### Insider Threats
+- Uploading company files to personal cloud accounts  
+- Sending sensitive data externally  
+- Copying data to USB devices  
 
-Data exfiltration
+> Insider activity is one of the most common causes of data leakage.
 
-Insider Threats
+### Accidental Actions
+- Deleting important files  
+- Sending data to the wrong recipient  
 
-Uploading company files to personal cloud accounts
+### Environmental Factors
+- Fire or flood  
+- Hardware or data center failure  
 
-Sending sensitive data externally
+---
 
-Copying data to USB devices
-
-Insider activity is one of the most common causes of data leakage.
-
-Accidental Actions
-
-Deleting important files
-
-Sending data to the wrong recipient
-
-Environmental Factors
-
-Fire
-
-Flood
-
-Hardware or data center failure
-
-4. SOC Analyst Role in DLP
-
+## 4. SOC Analyst Role in DLP
 SOC analysts monitor user activity and investigate potential data leakage incidents.
 
-Cloud Activity Monitoring
-
+### Cloud Activity Monitoring
 Watch for traffic to external storage services such as:
+- Google Drive  
+- Dropbox  
+- OneDrive  
 
-Google Drive
+**Purpose:** Detect unauthorized data uploads.
 
-Dropbox
+### Website Categorization
+Security solutions categorize websites by type.  
 
-OneDrive
-
-This helps detect unauthorized data uploads.
-
-Website Categorization
-
-Security solutions categorize websites by type.
-
-Example Rule
-
+**Example Rule:**
+```text
 If internal traffic goes to category: Cloud Storage
 → Generate Alert
-
 This allows detection even if the specific site is unknown.
+```
+---
 
-5. What DLP Tools Monitor
-Email
+## 5. What DLP Tools Monitor
 
-Detect or block sensitive data sent externally
-Example: Credit card numbers
+- **Email:** Detect or block sensitive data sent externally  
+  *Example:* Credit card numbers
 
-Cloud Services
+- **Cloud Services:** Monitor or block file uploads to external storage
 
-Monitor or block file uploads to external storage
+- **Removable Media:** USB drives, external hard disks
 
-Removable Media
+---
 
-USB drives
-
-External hard disks
-
-6. Data Classification (Critical Requirement)
+## 6. Data Classification (Critical Requirement)
 
 DLP effectiveness depends on proper data classification.
 
-Classification	Example
-Public	Website content
-Internal	Internal documents
-Confidential	Customer data
-Restricted / Top Secret	Financial records, salaries
+| Classification | Example |
+|----------------|---------|
+| Public | Website content |
+| Internal | Internal documents |
+| Confidential | Customer data |
+| Restricted / Top Secret | Financial records, salaries |
 
-Without classification:
+> Without classification, DLP systems cannot determine what data needs protection.
 
-DLP systems cannot determine what data needs protection.
+---
 
-7. DLP Policies
+## 7. DLP Policies
 
-Policies define what actions are allowed or blocked.
+Policies define allowed or blocked actions.
 
-Examples
+**Examples:**
+- Block sending credit card data via external email
+- Prevent copying HR files to USB
+- Generate alerts when files are uploaded to Dropbox
 
-Block sending credit card data via external email
+---
 
-Prevent copying HR files to USB
-
-Generate alerts when files are uploaded to Dropbox
-
-8. Integration with SIEM
+## 8. Integration with SIEM
 
 DLP systems send alerts to a SIEM platform for centralized monitoring.
 
-Example Alert
+**Example Alert:**
+```text
 User: Ahmed
 Action: File Upload
 Destination: Google Drive
 Content: Customer Data Detected
-SOC Analyst Responsibilities
+```
+## SOC Analyst Responsibilities
 
-Validate the activity
+- **Validate the activity**  
+- **Determine if it is:**
+  - Legitimate business use
+  - Policy violation
+  - Malicious activity
+  - False positive
 
-Determine if it is:
+---
 
-Legitimate business use
+## 🎯 Interview Key Points
 
-Policy violation
+- DLP prevents data leakage  
+- Data Corruption affects **Integrity**  
+- Insider threats are a major risk  
+- Data Classification is essential for DLP  
+- DLP monitors:
+  - Email
+  - Cloud storage
+  - USB devices  
+- Alerts are analyzed through SIEM
 
-Malicious activity
+---
 
-False positive
+## 🛠 Real SOC Investigation Scenario
 
-🎯 Interview Key Points
+**Alert:** A user uploaded a file containing customer data to Google Drive.
 
-DLP prevents data leakage
-
-Data Corruption affects Integrity
-
-Insider threats are a major risk
-
-Data Classification is essential for DLP
-
-DLP monitors:
-
-Email
-
-Cloud storage
-
-USB devices
-
-Alerts are analyzed through SIEM
-
-🛠 Real SOC Investigation Scenario
-
-Alert:
-A user uploaded a file containing customer data to Google Drive.
-
-Investigation Steps
-
-Identify the user and department
-
-Verify business justification
-
-Check data sensitivity level
-
-Review user activity history
-
-Escalate if the action is unauthorized
+**Investigation Steps:**
+1. Identify the user and department  
+2. Verify business justification  
+3. Check data sensitivity level  
+4. Review user activity history  
+5. Escalate if the action is unauthorized
